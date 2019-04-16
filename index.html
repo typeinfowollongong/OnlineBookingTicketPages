@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <title>TYPE INFO Pty. Ltd.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.css">
+  <link rel="stylesheet" href="css/mybooking.css">
+  
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    
+    <!--  Collapsible List Group  -->
+	  <div class="panel-group" id="accordion">
+	  	<!-- Floor plan -->
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+	        <h4 class="panel-title">
+	          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">购票预约</a>
+	        </h4>
+	      </div>
+	      <div id="collapse1" class="panel-collapse collapse in">
+	      	<div class="panel-body">
+	         <!--  -->
+			  <ul class="nav nav-pills nav-stacked">
+			  	<li class="active"><a data-toggle="pill" href="#stepOne">日期选择</a></li>
+			  	<li><a data-toggle="pill" href="#stepTwo">完善信息</a></li>
+			  	<li><a data-toggle="pill" href="#stepThree">确定订单</a></li>
+			  	<li><a data-toggle="pill" href="#stepFour">支付</a></li>
+			  	<li><a data-toggle="pill" href="#stepFive">完成</a></li>
+			  </ul>
+			</div>
+	      </div>
+	    </div>
+	     	    
+	  </div> 
+     <!--  end of Collapsible List Group  --> 
+    </div>
+    
+    <div class="col-sm-8 text-left"> 
+	  <div ng-view></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/datamodels.js"></script>
+<script src="js/common.js"></script>
+
+</body>
+</html>
+
