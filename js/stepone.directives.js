@@ -64,10 +64,12 @@ directives.directive('stepOneEditor',['StepOneService', function(StepOneService,
 				scope.value.selectCell = function(_row, _col){
 					scope.value.selectedRow = _row;
 					scope.value.selectedColumn = _col;
+					//alert(_row + ',' + _col);
 					scope.value.selectedDate = scope.value.theDateOfFortnight[_row * 7 + _col];
 				}
+				
 				// set selected table cell backtground color
-				scope.value.changeSelectedCellBgColor = function(_row,_col){
+				scope.value.changeSelectedCellBgColor = function(_row, _col){
 					if(scope.value.selectedRow==_row &&
 							scope.value.selectedColumn==_col){
 						return "grey";
