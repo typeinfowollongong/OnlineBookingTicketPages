@@ -1,7 +1,7 @@
 /**
 * Step One directive
 */
-directives.directive('stepOneEditor',['StepOneService', function(StepOneService, $scope, $location){
+directives.directive('stepOneEditor',['BookingService', function(BookingService, $scope, $location){
 	return {
 		restrict:
 			'AE',
@@ -9,19 +9,68 @@ directives.directive('stepOneEditor',['StepOneService', function(StepOneService,
 			{value : '='},
 		templateUrl:
 			'view/template/step-one-editor-template.htm',
+		controller: function($scope){
+		},
 		link:
-			function(scope, element, attrs){
+			function(scope, element, attrs, location){
 				scope.value = {};
 				scope.value.weeks = weeksArray();
 				scope.value.theDaysOfWeek = [];
 				scope.value.weeklyTickets = {};
 				scope.value.theDateOfFortnight = [];
 				scope.value.selectedDate = '';
+				scope.value.showstepone = true;
+				scope.value.showsteptwo = false;
+				scope.value.showstepthree = false;
+				scope.value.showstepfour = false;
+				scope.value.showstepfive = false;
 				
-				StepOneService.getWeeklyTickets().then(function(_result){
+				BookingService.getWeeklyTickets().then(function(_result){
 					//scope.value.weeklyTickets = _result.data;	
 					scope.value.setWeeklyTickets();
 				});
+				
+				scope.value.startBooking = function(){
+					//location.path("index.html#/view/StepTwoEditor.htm");
+					scope.value.showstepone = false;
+					scope.value.showsteptwo = true;
+					scope.value.showstepthree = false;
+					scope.value.showstepfour = false;
+					scope.value.showstepfive = false;					
+				}
+				
+				scope.value.previous2 = function(){
+					scope.value.showstepone = true;
+					scope.value.showsteptwo = false;
+					scope.value.showstepthree = false;
+					scope.value.showstepfour = false;
+					scope.value.showstepfive = false;					
+				}		
+				
+				scope.value.next2 = function(){
+					scope.value.showstepone = false;
+					scope.value.showsteptwo = false;
+					scope.value.showstepthree = true;
+					scope.value.showstepfour = false;
+					scope.value.showstepfive = false;					
+				}	
+				
+				scope.value.previous3 = function(){
+					scope.value.showstepone = false;
+					scope.value.showsteptwo = true;
+					scope.value.showstepthree = false;
+					scope.value.showstepfour = false;
+					scope.value.showstepfive = false;					
+				}		
+				
+				scope.value.next3 = function(){
+					scope.value.showstepone = false;
+					scope.value.showsteptwo = false;
+					scope.value.showstepthree = false;
+					scope.value.showstepfour = true;
+					scope.value.showstepfive = false;	
+					scope.value.generateBookingNumber();
+				}					
 				
 				scope.value.setWeeklyTickets = function(){
 					var firstDayOfWeek = new Date();
@@ -76,7 +125,79 @@ directives.directive('stepOneEditor',['StepOneService', function(StepOneService,
 					}else{
 						return "white";
 					}
-				}				
+				}			
+				
+				// step two
+				scope.value.tickets = {};
+				scope.value.programs = {};
+				scope.value.ticketPrices = {};
+				scope.value.idCards = {};
+				scope.value.booking = [];
+				scope.value.totalPrice = 0;
+
+			    BookingService.getPrograms().then(function(_result){
+					scope.value.programs = _result.data;	
+				});
+				
+			    BookingService.getTicketPrices().then(function(_result){
+					scope.value.ticketPrices = _result.data;	
+				});
+			    
+			    BookingService.getIdCards().then(function(_result){
+			    	scope.value.idCards = _result.data;	
+				});
+				
+				scope.value.addToBooking = function(){
+					var programid = scope.value.selectedProgram.id;
+					var programName = scope.value.selectedProgram.programName;
+					var ticketid = scope.value.selectedPrice.id;
+					var ticketName = scope.value.selectedPrice.ticketName;
+					var price = scope.value.selectedPrice.price;
+					var card = scope.value.selectedIdCard.cardName;
+					
+					scope.value.booking.push({ 
+		                'programId': programid, 
+		                'programName': programName, 
+		                'ticketId': ticketid,
+		                'ticketName': ticketName,
+		                'price': price,
+		                'card': card,
+		                'cardNumber': scope.value.cardNumber,
+		            });
+					
+					scope.value.setTotalPrice();
+		        };
+				
+		        scope.value.removeFromBooking = function(item){
+		        	scope.value.booking.splice(item, 1);
+		        	scope.value.setTotalPrice();
+		        }
+				
+				// step three
+		        scope.value.setTotalPrice = function(){
+		        	var total = 0;
+		        	for(i = 0; i < scope.value.booking.length; i++){
+		        		total += scope.value.booking[i].price*1;
+		        	}
+		        	scope.value.totalPrice = total;
+		        }
+		        
+		        scope.value.generateBookingNumber = function(){
+				    BookingService.generateBookingId().then(function(_result){
+				    	scope.value.bookingId = _result.data.id;	
+					});
+		        }
+		        
+		        // step four
+		        scope.value.payment = {};
+		        scope.value.doPayment = function(){
+		        	// call payment; 
+					scope.value.showstepone = false;
+					scope.value.showsteptwo = false;
+					scope.value.showstepthree = false;
+					scope.value.showstepfour = false;
+					scope.value.showstepfive = true;	
+		        }
 				
 			}
 	}

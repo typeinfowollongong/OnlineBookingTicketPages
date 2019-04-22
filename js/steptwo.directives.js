@@ -6,8 +6,10 @@ directives.directive('stepTwoEditor',['StepTwoService', function(StepTwoService,
 			{value : '='},
 		templateUrl:
 			'view/template/step-two-editor-template.htm',
+		//require: 'stepOneEditor',
 		link:
-			function(scope, element, attrs){
+			function(scope, element, attrs){		
+				//scope.value.selectedDate = stepOneEditorCtrl.getSelectedDate();
 				scope.value = {};	
 				scope.value.tickets = {};
 				scope.value.programs = {};
