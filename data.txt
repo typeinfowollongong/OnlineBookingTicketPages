@@ -1,0 +1,88 @@
+union=0&number=2&types=
+[
+{"type_id":"4","extend_id":"5","price":"30","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"},
+{"type_id":"3","extend_id":"5","price":"50","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"}
+]
+&paytype=[{"count":80,"name":"cash"}]
+&total=80&cost=80.00&pick_date=2019-05-14&seller_id=3&customer_ary=[]&customer_id=-1&rate=1
+
+pass in json object from client
+==================================================
+json object
+{
+	order_details: 	[
+						{"type_id":"4","extend_id":"5","price":"30","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"},
+						{"type_id":"3","extend_id":"5","price":"50","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"}
+					],
+	card: "xxxxxxxx",
+	phone: "1111111111",
+	count: 2,
+	cost: 80,
+	window_id: 10 (default is hardcoded for online)
+}
+
+
+add ID card number if card not exist
+==============================================
+$card = [id card number] from post json
+$phone = [phone] from post json
+
+INSERT INTO `customer`(`card`, `phone`) VALUES ($card,$phone)
+
+add ticket deal record
+=============================================
+$customer_id = selectr id from `customer`
+$online_order_id = $phone+timestamp
+$status = 1 by default
+$value = total amount
+$cost = $value
+$count = number of tickets
+$window_id = 
+$current_datetime = 
+
+INSERT INTO `deal_recorder`(`online_order_id`, `status`, `value`, `cost`, `count`, `customer_id`, `window_id`, `update_time`) 
+VALUES ($online_order_id,$status,$value,$cost,$count,$customer_id,$window_id,$current_datetime)
+
+insert deal payment
+============================================
+$deal_id = select id from deal_recorder
+$payment_id = default 1 (cash)
+$value = total cost
+
+INSERT INTO `deal_payment`(`deal_id`, `payment_id`, `value`) VALUES ($deal_id,$payment_id,$value)
+
+
+insert ticket_count
+============================================
+$adjusted_price_id = $type_id from order_details of json
+$program_extend_id = $extend_id from order_details of json
+$count = $price from order_details of json
+$use_time = $use_date
+
+INSERT INTO `ticket_count`(`adjusted_price_id`, `program_extend_id`, `count`, `use_time`) VALUES ($adjusted_price_id,$program_extend_id,$count,$use_time)
+
+and insert tickets
+============================================
+$deal_id = select id from deal_recorder
+$ticket_code = generate ????
+$status = 1 by default
+
+INSERT INTO `tickets`(`deal_id`, `ticket_code`, `status`) VALUES ($deal_id,$ticket_code,$status)
+
+insert tickets
+============================================
+$ticket_id = select id from tickets
+$adjusted_price_id = $type_id from order_details of json
+$program_extend_id = $extend_id from order_details of json
+$count = $price from order_details of json
+$use_time = $use_date
+$refund_count = $count 
+$check_in_count = $count 
+$check_out_count = $count
+$update_time=current_datetime
+
+INSERT INTO `ticket_detail`(`ticket_id`, `adjusted_price_id`, `program_extend_id`, `count`, `refund_count`, `check_in_count`, `check_out_count`, `use_time`, `update_time`) 
+VALUES ($ticket_id,$adjusted_price_id,$program_extend_id,$count,$refund_count,$check_in_count,$check_out_count,$use_time,[value-9])
+
+
+
