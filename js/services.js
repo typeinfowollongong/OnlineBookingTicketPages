@@ -5,7 +5,7 @@
 factories.factory('BookingService', function($http){
 	return {
 		
-		getWeeklyAvailableTickets: function(dateStr) {
+		getWeeklyTickets: function(dateStr) {
 			console.log("SERVICE: calling all tickets...");
 			//return $http.get('json/availabletickets.json');
 			return $http({
@@ -20,8 +20,9 @@ factories.factory('BookingService', function($http){
 			})
 			.error(function(){
 
-			});			
-		},	
+			});				
+			
+		},
 		
 		getPrograms: function() {
 			console.log("SERVICE: calling all programes...");
@@ -31,23 +32,16 @@ factories.factory('BookingService', function($http){
 		getTicketPrices: function() {
 			console.log("SERVICE: calling all ticket prices...");
 			return $http.get('json/ticketPrices.json');
-		},		
+		},
 		
-		/*
-		getFutureFloorPlan: function() {
-			console.log("SERVICE: calling all rooms...");
-			return $http.get('json/futurefloorplan.json');
-		},	
+		getIdCards: function() {
+			console.log("SERVICE: calling all ticket prices...");
+			return $http.get('json/idcards.json');
+		},
 		
-		getFloorPlan: function() {
-			console.log("SERVICE: calling all rooms...");
-			return $http.get('json/floorplan.json');
-		},			
-		
-		getAllRooms: function() {
-			console.log("SERVICE: calling rooms...");
-			return $http.get('json/rooms.json');
-		},	
-		*/
+		generateBookingId: function() {
+			console.log("SERVICE: calling all ticket prices...");
+			return $http.get('json/bookingId.json');
+		},
 	};
 });

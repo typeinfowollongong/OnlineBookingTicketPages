@@ -1,23 +1,15 @@
 
-controllers.controller('BookingController', ['BookingService', function(BookingService, $scope, $location){
-	
+controllers.controller('bookingController', ['StepOneService', function(StepOneService, $scope, $location){
+
 	$scope.value = {};
 	$scope.value.weeks = weeksArray();
 	$scope.value.theDaysOfWeek = [];
 	$scope.value.weeklyTickets = {};
 	$scope.value.theDateOfFortnight = [];
 	$scope.value.selectedDate = '';
-	$scope.value.tickets = {};
-	/*
-	BookingService.getWeeklyTickets().then(function(_result){
-		//$scope.value.tickets = _result.data;	
-		$scope.value.setWeeklyTickets();
-	});
-	
-	$scope.value.startBooking = function(){
-		location.path("index.html#/view/StepTwoEditor.htm");				
-	}		
-						
+
+	$scope.value.setWeeklyTickets();	
+
 	$scope.value.setWeeklyTickets = function(){
 		var firstDayOfWeek = new Date();
 		var lastDayOfWeek = new Date();
@@ -32,7 +24,7 @@ controllers.controller('BookingController', ['BookingService', function(BookingS
 				"dateOfWeek": dateToStr(currentDate),
 				"tickets": "",
 			}
-			//$scope.value.weeklyTickets.push(day);
+			//scope.value.weeklyTickets.push(day);
 			$scope.value.theDateOfFortnight.push(dateToStr(currentDate));
 		}
 		
@@ -71,8 +63,8 @@ controllers.controller('BookingController', ['BookingService', function(BookingS
 		}else{
 			return "white";
 		}
-	}							
-	*/
+	}					
+	
 	
 }]);
 
