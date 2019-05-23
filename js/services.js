@@ -5,9 +5,22 @@
 factories.factory('BookingService', function($http){
 	return {
 		
-		getWeeklyAvailableTickets: function() {
+		getWeeklyAvailableTickets: function(dateStr) {
 			console.log("SERVICE: calling all tickets...");
-			return $http.get('json/availabletickets.json');
+			//return $http.get('json/availabletickets.json');
+			return $http({
+				method	:	'POST',
+				url 		: 'http://localhost:8098/ServicePortalApi/webservice/BookingTicketApi.php',
+				data 		: {'action':'insert', 'data':{'date':dateStr}}, 
+				headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+			})
+			.success(function(data) {
+				console.log(data);
+				return data;
+			})
+			.error(function(){
+
+			});			
 		},	
 		
 		getPrograms: function() {
@@ -20,7 +33,7 @@ factories.factory('BookingService', function($http){
 			return $http.get('json/ticketPrices.json');
 		},		
 		
-		
+		/*
 		getFutureFloorPlan: function() {
 			console.log("SERVICE: calling all rooms...");
 			return $http.get('json/futurefloorplan.json');
@@ -35,5 +48,6 @@ factories.factory('BookingService', function($http){
 			console.log("SERVICE: calling rooms...");
 			return $http.get('json/rooms.json');
 		},	
+		*/
 	};
 });

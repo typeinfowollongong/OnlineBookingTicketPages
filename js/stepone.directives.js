@@ -24,9 +24,10 @@ directives.directive('stepOneEditor',['BookingService', function(BookingService,
 				scope.value.showstepthree = false;
 				scope.value.showstepfour = false;
 				scope.value.showstepfive = false;
+				scope.value.tickets = {};
 				
 				BookingService.getWeeklyTickets().then(function(_result){
-					//scope.value.weeklyTickets = _result.data;	
+					scope.value.tickets = _result.data;	
 					scope.value.setWeeklyTickets();
 				});
 				
