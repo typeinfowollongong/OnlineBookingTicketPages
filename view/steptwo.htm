@@ -1,0 +1,68 @@
+<div class="col-md-12">
+
+	<div class="row">
+        <div class="panel panel-default">
+          <div class="panel-body"> 		
+	        <div class="col-sm-2 form-group">
+	        	<label for="txtSelectProgram">展馆:</label>
+				<select class="form-control" id="txtSelectProgram" name="txtSelectProgram" placeholder="请选择展馆..." ng-model="value.selectedProgram" 
+				ng-options="b.name for b in value.programs" ng-change="value.selectProgram()">
+ 				</select>	
+	        </div>
+	        <div class="col-sm-2 form-group">
+	        	<label for="txtSelectPrice">票类:</label>
+				<select class="form-control" id="txtSelectPrice" name="txtSelectPrice" placeholder="请选择票类..." ng-model="value.selectedPrice" ng-options="b.name for b in value.ticketPrices">
+ 				</select>
+	        </div>  
+	        <div class="col-sm-2 form-group">
+	        	<label for="txtSelectPrice">数量:</label>
+ 				<input type="text" class="form-control" id="txtSelectQuantity" name="txtSelectQuantity" placeholder="请输入购票张数..." ng-model="value.ticketQuantity" />
+	        </div>   
+	        
+            <div class="col-sm-2 form-group">
+            	<label for="txtSelectPrice">操作</label>
+                <input type="submit" class="form-control btn btn-primary pull-right" ng-click="value.addToBooking()" value="添加" />
+            </div>
+            
+          </div> 
+        </div>	
+	</div>
+
+	<div class="row">
+			<label>The visiting date: {{ value.selectedDate }}</label>
+			<table class="table table-striped table-bordered">
+						<thead>
+						<tr>
+						 <th>序号.</th>
+						 <th>展馆</th>
+						 <th>票类</th>
+						 <th>数量</th>
+						 <th>价格</th>
+						 <th></th>
+						</tr>
+					</thead>
+							<tbody>
+									<tr ng-repeat="b in value.booking" ng-init="row=$index">
+										<td>{{ $index + 1 }}</td>
+										<td>{{ b.programName}}</td>
+										<td>{{ b.ticketTypeName}}</td>
+										<td>{{ b.ticketQuantity}}</td>
+										<td>{{ b.ticketPrice}}</td>
+									 <td><input type="submit" class="btn btn-primary" ng-click="value.removeFromBooking(row)" value="删除"/></td> 
+									</tr>
+							</tbody>
+			</table>		  	
+	</div>
+			
+			<div class="row">
+			<div class="col-sm-2 form-group">
+						<input type="submit" class="form-control btn btn-primary pull-left" ng-click="value.gotoStepOne()" value="上一步" />
+			</div>
+			<div class="col-sm-8 form-group">
+			</div>
+			<div class="col-sm-2 form-group">
+							<input type="submit" class="form-control btn btn-primary pull-right" ng-click="value.gotoStepThree()" value="下一步" />
+			</div>
+
+		</div>
+ </div>

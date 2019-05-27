@@ -8,19 +8,33 @@ union=0&number=2&types=
 
 pass in json object from client
 ==================================================
-json object
+
+
+submit orders
+========================================================================================
+url: http://localhost:8388/ServicePortalApi/webservice/BookingTicketApi.php
+method: POST
+json:
 {
-	order_details: 	[
-						{"type_id":"4","extend_id":"5","price":"30","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"},
-						{"type_id":"3","extend_id":"5","price":"50","number":"1","date":"2019-05-14  19:38:00","use_date":"2019-05-14"}
-					],
-	card: "xxxxxxxx",
-	phone: "1111111111",
-	count: 2,
-	cost: 80,
-	window_id: 10 (default is hardcoded for online)
+	"action":"submit",
+	"data": 
+	{ 
+		"orders": 
+		[
+			{"typeId":"4","extendId":"5","price":"30","number":"1","dateOfEntry":"2019-05-14"},
+			{"typeId":"3","extendId":"5","price":"50","number":"1","dateOfEntry":"2019-05-14"}
+		],
+		"idCard": "121212121212",
+		"phone": "1111111111",
+		"totalNumberOfTickets": 2,
+		"totalCostOfTickets": 80,
+		"onlineWindow": 10,
+		"paymentId":1
+	}
 }
 
+
+logic of committing booking
 
 add ID card number if card not exist
 ==============================================

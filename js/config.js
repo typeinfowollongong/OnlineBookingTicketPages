@@ -1,0 +1,1 @@
+const API_URL_ROOT = 'http://localhost:8098/ServicePortalApi/webservice';

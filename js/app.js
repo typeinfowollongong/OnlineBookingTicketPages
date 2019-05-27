@@ -7,18 +7,33 @@ app.config(['$routeProvider', function($routeProvider){
 	
 	$routeProvider.
 	
-		when('/stepOne', {
-			templateUrl: 'view/StepOneEditor.htm',
-			//controller : BookingController
+		when('/stepone', {
+			templateUrl: 'view/stepone.htm',
+			controller : 'bookingCtrl'
 		}).	
-		
-		when('/stepTwo', {
-			templateUrl: 'view/StepTwoEditor.htm',
-			//controller : BookingController
+
+		when('/steptwo', {
+			templateUrl: 'view/steptwo.htm',
+			controller : 'orderCtrl'
 		}).			
 	
+		when('/stepthree', {
+			templateUrl: 'view/stepthree.htm',
+			controller : 'checkCtrl'
+		}).			
+		
+		when('/stepfour', {
+			templateUrl: 'view/stepfour.htm',
+			controller : 'payCtrl'
+		}).	
+		
+		when('/stepfive', {
+			templateUrl: 'view/stepfive.htm',
+			controller : 'confirmCtrl'
+		}).		
+		
 		otherwise({
-			redirectTo: '/stepOne'
+			redirectTo: '/stepone'
 		});
 }]);
 
