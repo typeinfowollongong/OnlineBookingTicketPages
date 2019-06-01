@@ -59,7 +59,7 @@ function monthsArray(){
  * return an array of 7 name of weeks
  */
 function weeksArray(){
-	return ['Mon','Tus','Wed','Thu','Fri','Sat','Sun'];
+	return ['周日','周一','周二','周三','周四','周五','周六'];
 }
 
 /**
