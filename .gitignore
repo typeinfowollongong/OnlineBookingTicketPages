@@ -2,3 +2,4 @@
 .buildpath
 .project
 .tern-project
+js/config.js.local

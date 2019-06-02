@@ -190,7 +190,7 @@ controllers.controller('orderCtrl', ['BookingService', 'ShareService', '$scope',
 		var ticketid = $scope.value.selectedPrice.id;
 		var ticketName = $scope.value.selectedPrice.name;
 		var price = $scope.value.selectedPrice.price;
-		var showDateTimeId = $scope.value.selectedPrice.price;
+		var showDateTimeId = $scope.value.selectedPrice.dateTimeId;
 		var quantity = $scope.value.ticketQuantity
 		
 		$scope.value.booking.push({ 
@@ -245,8 +245,8 @@ controllers.controller('checkCtrl', ['BookingService', 'ShareService', '$scope',
 		var total = 0;
 		var count = 0;
 		for(i = 0; i < $scope.value.booking.length; i++){
-			total += $scope.value.booking[i].ticketPrice*1;
-			count += $scope.value.booking[i].ticketQuantity*1;
+			total += ($scope.value.booking[i].ticketPrice*1) * ($scope.value.booking[i].ticketQuantity*1);
+			count += $scope.value.booking[i].ticketQuantity * 1;
 		}
 		$scope.value.totalPrice = total;
 		$scope.value.totalCount = count;
@@ -310,8 +310,8 @@ controllers.controller('payCtrl', ['BookingService', 'ShareService', '$scope', '
     	var arr = ShareService.get('orders');
     	for(i = 0; i < arr.length; i++){
     		orders.push({
-    			"typeId": 		arr[i]["programId"],
-    			"extendId":  	arr[i]["ticketTypeId"],
+    			"typeId": 		arr[i]["ticketTypeId"],
+    			"extendId":  	arr[i]["showDateTimeId"],
     			"price":		arr[i]["ticketPrice"],
     			"number":		arr[i]["ticketQuantity"],
     			"dateOfEntry":	selectedDate
